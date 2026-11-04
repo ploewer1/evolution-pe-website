@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Evolution PE design tokens
+   The default Tailwind palette is removed on purpose, so only brand
+   colors can be used and nothing off-brand sneaks in.
+------------------------------------------------------------------- */
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Navy (brand primary, from the curriculum materials) */
+  --color-navy-950: #111c36;
+  --color-navy-900: #1b2a4b;
+  --color-navy-800: #25385f;
+  --color-navy-700: #2f4672;
+  --color-navy-600: #3e5a8c;
+
+  /* Teal (brand secondary). Use teal-700 for text and buttons on white. */
+  --color-teal-50: #eaf7f8;
+  --color-teal-100: #d4eff1;
+  --color-teal-200: #a9dee2;
+  --color-teal-300: #74c7cd;
+  --color-teal-400: #3db1b9;
+  --color-teal-500: #1aa5ae;
+  --color-teal-600: #128b93;
+  --color-teal-700: #0e7078;
+  --color-teal-800: #0c5a61;
+
+  /* Light blue surfaces */
+  --color-sky-50: #f4fafc;
+  --color-sky-100: #e6f3f8;
+  --color-sky-200: #d2e8f1;
+  --color-sky-300: #b5d7e6;
+
+  /* Logo blue accent (use sparingly) */
+  --color-blue-600: #1472b0;
+
+  /* Neutral text and borders, tinted toward navy */
+  --color-ink-900: #1b2a4b;
+  --color-ink-700: #34465f;
+  --color-ink-600: #4b5d75;
+  --color-ink-500: #64748b;
+  --color-ink-300: #cbd5e1;
+  --color-ink-200: #e2e8f0;
+  --color-ink-100: #eef2f6;
+
+  /* Form errors only */
+  --color-danger-600: #b42318;
+  --color-danger-50: #fef3f2;
+  --color-danger-200: #fecdca;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Manrope Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 1px 2px rgb(27 42 75 / 0.05), 0 8px 24px -8px rgb(27 42 75 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(27 42 75 / 0.06), 0 18px 40px -12px rgb(27 42 75 / 0.22);
+
+  --radius-card: 1.25rem;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+  body { @apply bg-white font-sans text-ink-700 antialiased; text-rendering: optimizeLegibility; }
+  h1, h2, h3, h4 { @apply font-display text-navy-900; letter-spacing: -0.02em; }
+  ::selection { background: var(--color-teal-200); color: var(--color-navy-900); }
+  :focus-visible { outline: 3px solid var(--color-teal-500); outline-offset: 3px; border-radius: 6px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+}
+
+@layer components {
+  /* Subtle scroll reveal: CSS only, no JavaScript. Content is fully visible where unsupported. */
+  .reveal { }
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        animation: reveal-up linear both;
+        animation-timeline: view();
+        animation-range: entry 5% entry 45%;
+      }
+    }
+  }
+  @media print { .reveal { animation: none !important; opacity: 1 !important; transform: none !important; } }
+  @keyframes reveal-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .hero-grid {
+    background-image:
+      linear-gradient(to right, rgb(27 42 75 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(27 42 75 / 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 70% 70% at 70% 30%, black 20%, transparent 75%);
+  }
+
+  .prose-evo { @apply text-base leading-7 text-ink-700; }
+  .prose-evo h2 { @apply mt-10 mb-3 text-2xl font-bold; }
+  .prose-evo h3 { @apply mt-6 mb-2 text-lg font-semibold; }
+  .prose-evo p { @apply my-4; }
+  .prose-evo ul { @apply my-4 list-disc space-y-2 pl-6; }
+  .prose-evo a { @apply font-medium text-teal-700 underline underline-offset-4 hover:text-teal-800; }
+}
