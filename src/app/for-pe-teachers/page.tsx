@@ -105,11 +105,11 @@ export default function TeachersPage() {
         audience="teachers"
         source="for-pe-teachers"
         eyebrow="Teacher beta and updates"
-        title="Request beta access and updates"
+        title={siteConfig.analyzerUrl ? "Get beta updates and new tools" : "Request beta access and updates"}
         intro="Tell us you're a PE teacher and what you'd like to hear about. This list is only for teachers, so we can learn what you need."
         interests={["Fitness Test Analyzer beta", "Bench Boost updates", "K–5 Curriculum", "Shuttle Run Scoreboard", "School or district licenses"]}
         defaultInterests={["Fitness Test Analyzer beta"]}
-        submitLabel="Request beta access"
+        submitLabel={siteConfig.analyzerUrl ? "Join the teacher list" : "Request beta access"}
       >
         <CheckList className="mt-6" items={["Early access to the Fitness Test Analyzer", "Notice when the curriculum is ready", "A say in what we build next"]} />
         <p className="mt-6 text-sm text-ink-600">Interested in a school or district license? <LinkButton href="/contact?topic=school-license" variant="ghost">Tell us what you'd need</LinkButton></p>
@@ -119,7 +119,7 @@ export default function TeachersPage() {
         <SectionHeading eyebrow="Good to know" title="Questions teachers ask" />
         <div className="mt-8">
           <FAQ items={[
-            { q: "Can I use the analyzer today?", a: "It's in beta. Join the teacher waitlist and we'll tell you when access opens. Until then, nothing on this site asks for student data." },
+            { q: "Can I use the analyzer today?", a: siteConfig.analyzerUrl ? "Yes, it's open in beta. It runs in your browser and is designed not to upload or save student records, but check results against your official reports and follow your district's rules. Join the teacher list below to get updates." : "It's in beta. Join the teacher waitlist and we'll tell you when access opens. Until then, nothing on this site asks for student data." },
             { q: "Can I use it with FitnessGram data?", a: "The analyzer can summarize results using the \"Standard Met\" columns that your school's FitnessGram software already calculated. Evolution PE is independent and not affiliated with or endorsed by The Cooper Institute." },
             { q: "Is the curriculum ready to use?", a: "Not yet. It is being finalized. Join the list and we'll tell you when it's ready." },
             { q: "Is it aligned to national or state standards?", a: "We haven't published a standards alignment, and we don't claim endorsement by any standards organization. If an alignment is documented when the curriculum is released, we'll publish it." },
